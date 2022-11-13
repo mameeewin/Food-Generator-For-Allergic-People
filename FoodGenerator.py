@@ -4,13 +4,15 @@ from tkinter import ttk
 import webbrowser
 import random
 def aboutme():
-    aboutmewin = Tk()       
+    aboutmewin = Tk() 
+    aboutmewin.resizable(False, False)      
     aboutmewin.title("About The App!")
-    aboutMeTitle = Label(aboutmewin,font=("Consolas", 40), text="About The App!").pack()
-    aboutmedesc = Label(aboutmewin, font=("Consolas", 15), text="This app will help you fliter meals you can't eat and can eat. \nAll you have to do is put what you are allergic to. \nAnd BOOM, here are your meals you can eat.").pack()
-    creditss = Label(aboutmewin,font=("Consolas", 40), text="Credits").pack()
-    creditsdesc = Label(aboutmewin, font=("Consolas", 15), text="-Thawin Chalermdit: Coding, Graphic Design, First Tester.\n").pack()
-    close = Button(aboutmewin,font=("Consolas", 20), text="Close!", command=aboutmewin.destroy).pack()
+    aboutMeTitle = Label(aboutmewin,font=("Consolas", 40), text="About The App!",bg="#FFD3AF").pack()
+    aboutmewin.config(bg="#FFD3AF")
+    aboutmedesc = Label(aboutmewin, font=("Consolas", 15), text="This app will help you fliter meals you can't eat and can eat. \nAll you have to do is put what you are allergic to. \nAnd BOOM, here are your meals you can eat.",bg="#FFD3AF").pack()
+    creditss = Label(aboutmewin,font=("Consolas", 40), text="Credits",bg="#FFD3AF").pack()
+    creditsdesc = Label(aboutmewin, font=("Consolas", 15), text="-Thawin Chalermdit: Coding, Graphic Design, First Tester. from DSIL School",bg="#FFD3AF").pack()
+    close = Button(aboutmewin,font=("Consolas",20),bg=random.choice(["yellow","#C0FFB0"]), text="Close!", command=aboutmewin.destroy).pack()
 def start():
     try:
         welcome.destroy()
@@ -57,6 +59,8 @@ def start():
         ,"fried chicken":["chicken", "frying", "egg", "wheat", "flour", "vegetable", "garlic", " buttermilk", "milk", "black pepper"]
         ,"cake":["flour", "wheat", "egg", "butter", "milk", "oil", "baking soda", "leavening agent"]
         ,"Meatballs":["meat", "beef", "cheese", "milk", "tomato", "egg", "wheat", "salt", "leavening agent", "milk", "meal", "bread", "onion", "garlic", "bread crumbs"]
+        ,"Corn":["vegetable"]
+        ,"Salmon":["water", "protein", "fish"]
         }
     def check_allergens():
         allergens = []
@@ -70,9 +74,6 @@ def start():
         if sesameCheck.get() == 1: allergens.append("sesame")
         if shellFishCheck.get() == 1: allergens.append("shellFish")
         return allergens
-    def print_allergens():
-        print(check_allergens())
-    
     def checkFoodThatCanEat():
         def goBackRightNow():
             windowCheckFood.destroy()
@@ -80,12 +81,16 @@ def start():
         allergens = check_allergens()
         window.destroy()
         windowCheckFood = Tk()
+        windowCheckFood.resizable(False, False)
         windowCheckFood.title("Food Generator for Allergic People: Check Foods You can Eat!")
         windowCheckFood.geometry("800x600")
+        windowCheckFood.config(bg="#FFD3AF")
+
         scrollbar = Scrollbar(windowCheckFood)
         scrollbar.pack( side = RIGHT,
                 fill = Y )
-        mylist = Listbox(windowCheckFood, yscrollcommand=scrollbar.set , font=("Consolas", 15))
+        
+        mylist = Listbox(windowCheckFood, yscrollcommand=scrollbar.set , font=("Consolas", 15), bg="#DEFF96")
         def selected_item():
             try:
                 for i in mylist.curselection():
@@ -105,12 +110,14 @@ def start():
                         got = mylist.get(i)[12:]
                     else:
                         got = mylist.get(i)[14:str(mylist.get(i)).index("because")-1]
-                    ingredientFood = Tk()       
+                    ingredientFood = Tk()  
+                    ingredientFood.resizable(False, False)     
                     ingredientFood.title(got)
-                    foodTitle = Label(ingredientFood,font=("Consolas", 30), text=got).pack()
-                    ingredientLabel = Label(ingredientFood, font=("Consolas", 20), text="Ingredients: ").pack()
-                    ingredients = Label(ingredientFood, font=("Consolas", 20), text=", ".join(foods[got])).pack()
-                    close = Button(ingredientFood,font=("Consolas", 20), text="Close!", command=ingredientFood.destroy).pack()
+                    ingredientFood.config(bg="#FFD3AF")
+                    foodTitle = Label(ingredientFood,font=("Consolas", 30), text=got, bg="#FFD3AF").pack()
+                    ingredientLabel = Label(ingredientFood, font=("Consolas",20),bg="#FFD3AF", text="Ingredients: ").pack()
+                    ingredients = Label(ingredientFood, font=("Consolas",20),bg="#FFD3AF", text=", ".join(foods[got])).pack()
+                    close = Button(ingredientFood,font=("Consolas",20),bg="#DEFF96", text="Close!", command=ingredientFood.destroy).pack()
             except Exception:
                 pass
         allergenFontSize = 20
@@ -121,13 +128,13 @@ def start():
         else:
             allergenFontSize = 20
         AllergenLabel = Label(windowCheckFood, text=f"Allergies: {', '.join(allergens)}" if allergens != [] else "Allergens: None!",
-                font=("Consolas", allergenFontSize))
+                font=("Consolas", allergenFontSize),bg="#FFD3AF")
         AllergenLabel.pack()
-        red = Label(windowCheckFood, font=("Consolas", 20), fg="red", text="Red Text = You cannot eat this.").pack()
-        green = Label(windowCheckFood, font=("Consolas", 20), fg="green", text="Red Text = You can eat this.").pack()
-        goBack = Button(windowCheckFood, font=("Consolas", 20), text="Go Back",command=goBackRightNow).pack()
-        filterText = Label(windowCheckFood, font=("Consolas", 20), text="Filter Search...").pack()
-        filterInput = Entry(windowCheckFood, font=("Consolas", 20))
+        red = Label(windowCheckFood, font=("Consolas",20),bg="#FFD3AF", fg="red", text="Red Text = You cannot eat this.").pack()
+        green = Label(windowCheckFood, font=("Consolas",20),bg="#FFD3AF", fg="green", text="Red Text = You can eat this.").pack()
+        goBack = Button(windowCheckFood, font=("Consolas",20),bg="yellow", text="Go Back",command=goBackRightNow).pack()
+        filterText = Label(windowCheckFood, font=("Consolas",20),bg="#FFD3AF", text="Filter Search...").pack()
+        filterInput = Entry(windowCheckFood, font=("Consolas",20))
         filterInput.pack()
         allergies = allergens
         foods = foodAndIngredients
@@ -167,14 +174,16 @@ def start():
         
         mylist.pack( fill = BOTH )
         scrollbar.config(command=mylist.yview)
-        getSelected = Button(windowCheckFood, font=("Consolas", 20), text="Search!",command=selected_item).pack()
-        checkIngredients = Button(windowCheckFood, font=("Consolas", 20), text="Check Ingredients",command=ingredient_item).pack()
+        getSelected = Button(windowCheckFood, font=("Consolas",20),bg="yellow", text="Search!",command=selected_item).pack()
+        checkIngredients = Button(windowCheckFood, font=("Consolas",20),bg="yellow", text="Check Ingredients",command=ingredient_item).pack()
         filterInput.bind("<KeyRelease>", check)
         windowCheckFood.mainloop()
     window = Tk()
     window.geometry("800x600")
-
+    window.resizable(False, False)
     window.title("Food Generator for Allergic People: What are you allergic to?")
+    bg = PhotoImage(file="./images/background.png")
+    myBackground = Label(window, image=bg).pack()
     wheatCheck = IntVar()
     milkCheck = IntVar()
     fishCheck = IntVar()
@@ -185,48 +194,50 @@ def start():
     sesameCheck = IntVar()
     shellFishCheck = IntVar()
     title = Label(window, text="What are you allergic to?",
-                font=("Consolas", 20)).place(x=0, y=0)
-    wheatCheckbox = Checkbutton(window, variable=wheatCheck, onvalue=1, offvalue=0)
+                font=("Consolas",20),bg="#FFD3AF").place(x=0, y=0)
+    wheatCheckbox = Checkbutton(window, variable=wheatCheck, onvalue=1, offvalue=0,bg="#FFD3AF")
     wheatCheckbox.place(x=0, y=50)
     wheatLabel = Label(window, text="Wheat", font=(
-        "Consolas", 20)).place(x=30, y=39)
-    MilkCheckBox = Checkbutton(window,variable=milkCheck, onvalue=1, offvalue=0).place(x=0, y=100)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=39)
+    MilkCheckBox = Checkbutton(window,variable=milkCheck, onvalue=1, offvalue=0,bg="#FFD3AF").place(x=0, y=100)
     MilkLabel = Label(window, text="Milk", font=(
-        "Consolas", 20)).place(x=30, y=89)
-    FishCheckBox = Checkbutton(window,variable=fishCheck, onvalue=1, offvalue=0).place(x=0, y=150)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=89)
+    FishCheckBox = Checkbutton(window,variable=fishCheck, onvalue=1, offvalue=0,bg="#FFD3AF").place(x=0, y=150)
     FishLabel = Label(window, text="Fish", font=(
-        "Consolas", 20)).place(x=30, y=139)
-    EggCheckBox = Checkbutton(window,variable=eggCheck, onvalue=1, offvalue=0).place(x=0, y=200)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=139)
+    EggCheckBox = Checkbutton(window,variable=eggCheck, onvalue=1, offvalue=0,bg="#FFD3AF").place(x=0, y=200)
     EggLabel = Label(window, text="Egg", font=(
-        "Consolas", 20)).place(x=30, y=189)
-    peanutCheckBox = Checkbutton(window,variable=peanutCheck, onvalue=1, offvalue=0).place(x=0, y=250)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=189)
+    peanutCheckBox = Checkbutton(window,variable=peanutCheck, onvalue=1, offvalue=0,bg="#FFD3AF").place(x=0, y=250)
     peanutLabel = Label(window, text="Peanut", font=(
-        "Consolas", 20)).place(x=30, y=239)
-    soyCheckBox = Checkbutton(window,variable=soyCheck, onvalue=1, offvalue=0).place(x=0, y=300)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=239)
+    soyCheckBox = Checkbutton(window,variable=soyCheck, onvalue=1, offvalue=0,bg="#FFD3AF").place(x=0, y=300)
     soyLabel = Label(window, text="Soy", font=(
-        "Consolas", 20)).place(x=30, y=289)
-    treeNutCheckBox = Checkbutton(window,variable=treeNutCheck, onvalue=1, offvalue=0).place(x=0, y=350)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=289)
+    treeNutCheckBox = Checkbutton(window,variable=treeNutCheck, onvalue=1, offvalue=0,bg="#FFD3AF").place(x=0, y=350)
     treeNutLabel = Label(window, text="Tree Nuts", font=(
-        "Consolas", 20)).place(x=30, y=339)
-    seasameCheckBox = Checkbutton(window,variable=sesameCheck, onvalue=1, offvalue=0).place(x=0, y=400)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=339)
+    seasameCheckBox = Checkbutton(window,variable=sesameCheck, onvalue=1, offvalue=0,bg="#FFD3AF").place(x=0, y=400)
     seasameLabel = Label(window, text="Sesame", font=(
-        "Consolas", 20)).place(x=30, y=389)
-    shellfishCheckBox = Checkbutton(window,variable=shellFishCheck, onvalue=1, offvalue=0).place(x=0, y=450)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=389)
+    shellfishCheckBox = Checkbutton(window,variable=shellFishCheck, onvalue=1, offvalue=0,bg="#FFD3AF").place(x=0, y=450)
     shellfishLabel = Label(window, text="Shellfish", font=(
-        "Consolas", 20)).place(x=30, y=439)
+        "Consolas", 20),bg="#FFD3AF").place(x=30, y=439)
 
-    submitButton = Button(window, font=("Consolas", 20), text="Submit Allergens",command=checkFoodThatCanEat)
+    submitButton = Button(window, font=("Consolas",20),bg="#C0FFB0", text="Submit Allergens",command=checkFoodThatCanEat)
     submitButton.place(x=0, y=489)
 
     window.mainloop()
 
  
 welcome = Tk()
+welcome.resizable(False, False)
 welcome.title("Welcome To Food Generator!")
-title = Label(welcome, text="Welcome To Food Generator", font=("Consolas", 50)).pack()
-title2 = Label(welcome, text="For Allergic People!", font=("Consolas", 40)).pack()
-randomText = Label(welcome, text=f'Random Sentence for You: {random.choice(["Making some meals...", "I hear you cooking pie :)","You found the legendary food!", "I just filtered a few meals!", "Hope I make a good cake :D"])}', font=("Consolas", 20)).pack()
-startTheApp = Button(welcome, text=random.choice(["Let's Go!", "Start!"]), font=("Consolas", 20), command=start).pack()
-aboutMe = Button(welcome, text="About This App", font=("Consolas", 20), command=aboutme).pack()
+welcome.config(bg="#FFD3AF")
+title = Label(welcome, text="Welcome To Food Generator", font=("Consolas", 50),bg="#FFD3AF").pack()
+title2 = Label(welcome, text="For Allergic People!", font=("Consolas", 40),bg="#FFD3AF").pack()
+randomText = Label(welcome, text=f'Random Sentence for You: {random.choice(["Making some meals...", "I hear you cooking pie :)","You found the legendary food!", "I just filtered a few meals!", "Hope I make a good cake :D"])}', font=("Consolas",20),bg="#FFD3AF").pack()
+startTheApp = Button(welcome, text=random.choice(["Let's Go!", "Start!"]), font=("Consolas",20),bg="#C0FFB0", command=start).pack()
+aboutMe = Button(welcome, text="About This App", font=("Consolas",20),bg="#C0FFB0", command=aboutme).pack()
 welcome.mainloop()
 
