@@ -9,7 +9,7 @@ def aboutme():
     aboutmewin.title("About The App!")
     aboutMeTitle = Label(aboutmewin,font=("Consolas", 40), text="About The App!",bg="#FFD3AF").pack()
     aboutmewin.config(bg="#FFD3AF")
-    aboutmedesc = Label(aboutmewin, font=("Consolas", 15), text="This app will help you fliter meals you can't eat and can eat. \nAll you have to do is put what you are allergic to. \nAnd BOOM, here are your meals you can eat.",bg="#FFD3AF").pack()
+    aboutmedesc = Label(aboutmewin, font=("Consolas", 15), text="This app will help you filter recipes for meals you can and can’t eat.\n All you have to do is input your allergies into the app and BOOM, \nit loads the meals you can eat.",bg="#FFD3AF").pack()
     creditss = Label(aboutmewin,font=("Consolas", 40), text="Credits",bg="#FFD3AF").pack()
     creditsdesc = Label(aboutmewin, font=("Consolas", 15), text="-Thawin Chalermdit: Coding, Graphic Design, First Tester. from DSIL School",bg="#FFD3AF").pack()
     close = Button(aboutmewin,font=("Consolas",20),bg=random.choice(["yellow","#C0FFB0"]), text="Close!", command=aboutmewin.destroy).pack()
@@ -18,6 +18,7 @@ def start():
         welcome.destroy()
     except:
         pass
+
     foodAndIngredients = {"pineapple pizza":["pineapple", "pizza", "ham", "cheese", "mozzarella", "tomato sauce", "pizza dough", "wheat", "milk"]
         ,"burger":["ground beef","wheat","tomato",'cheese', "garlic", "egg", "onion", "black pepper", "bread crumbs"]
         ,"steak with butter":["beef", "sauce", "butter", "black pepper", "onion", "minced garlic", "milk"]
@@ -61,6 +62,11 @@ def start():
         ,"Meatballs":["meat", "beef", "cheese", "milk", "tomato", "egg", "wheat", "salt", "leavening agent", "milk", "meal", "bread", "onion", "garlic", "bread crumbs"]
         ,"Corn":["vegetable"]
         ,"Salmon":["water", "protein", "fish"]
+        ,"Baked Sweet Potatoes":["black beans", "corn", "radish", "red onion", "cilantro"]
+        ,"Grain Bowls":["rice", "farro", "quinoa", "millet", "wheat"]
+        ,"Crispy Microwaved Bacon":["bacon"]
+        ,"Bacon Mac and Cheese":["bacon", "wheat", "milk", "water", "mac", "cheese","egg", "wheat", "water", "rice"]
+        ,"Pasta":["egg", "wheat", "water", "rice"]
         }
     def check_allergens():
         allergens = []
@@ -82,7 +88,7 @@ def start():
         window.destroy()
         windowCheckFood = Tk()
         windowCheckFood.resizable(False, False)
-        windowCheckFood.title("Food Generator for Allergic People: Check Foods You can Eat!")
+        windowCheckFood.title("Food Generator For People With Allergies: Check Foods You can Eat!")
         windowCheckFood.geometry("800x600")
         windowCheckFood.config(bg="#FFD3AF")
 
@@ -181,7 +187,7 @@ def start():
     window = Tk()
     window.geometry("800x600")
     window.resizable(False, False)
-    window.title("Food Generator for Allergic People: What are you allergic to?")
+    window.title("Food Generator For People With Allergies: What are you allergic to?")
     bg = PhotoImage(file="./images/background.png")
     myBackground = Label(window, image=bg).pack()
     wheatCheck = IntVar()
@@ -235,9 +241,8 @@ welcome.resizable(False, False)
 welcome.title("Welcome To Food Generator!")
 welcome.config(bg="#FFD3AF")
 title = Label(welcome, text="Welcome To Food Generator", font=("Consolas", 50),bg="#FFD3AF").pack()
-title2 = Label(welcome, text="For Allergic People!", font=("Consolas", 40),bg="#FFD3AF").pack()
+title2 = Label(welcome, text="For People With Allergies!", font=("Consolas", 40),bg="#FFD3AF").pack()
 randomText = Label(welcome, text=f'Random Sentence for You: {random.choice(["Making some meals...", "I hear you cooking pie :)","You found the legendary food!", "I just filtered a few meals!", "Hope I make a good cake :D"])}', font=("Consolas",20),bg="#FFD3AF").pack()
 startTheApp = Button(welcome, text=random.choice(["Let's Go!", "Start!"]), font=("Consolas",20),bg="#C0FFB0", command=start).pack()
 aboutMe = Button(welcome, text="About This App", font=("Consolas",20),bg="#C0FFB0", command=aboutme).pack()
 welcome.mainloop()
-
