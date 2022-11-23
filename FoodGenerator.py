@@ -67,7 +67,10 @@ def start():
         ,"Crispy Microwaved Bacon":["bacon"]
         ,"Bacon Mac and Cheese":["bacon", "wheat", "milk", "water", "mac", "cheese","egg", "wheat", "water", "rice"]
         ,"Pasta":["egg", "wheat", "water", "rice"]
+        ,"melon":["fruit"]
+        ,"watermelon":["fruit"]
         }
+    
     def check_allergens():
         allergens = []
         if wheatCheck.get() == 1: allergens.append("wheat")
